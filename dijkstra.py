@@ -38,7 +38,7 @@ def dijkstra(graf, indeks_start):
                 graf[indeks_sasiada].odleglosc = graf[indeks_obecnego].odleglosc+waga
 
 
-oryginalny_graf=[
+graf=[
     Wierzcholek(1, [(9,8), (4,4)]),
     Wierzcholek(2, [(10,1), (7,4), (4,5)]),
     Wierzcholek(3, [(8,4), (7,5), (4,5), (5,8)]),
@@ -51,8 +51,8 @@ oryginalny_graf=[
     Wierzcholek(10, [(6,4), (8,5), (2,1), (9,7)])
 ]
 
+indeks_startowy=0
+dijkstra(graf, indeks_startowy)
 
-dijkstra(oryginalny_graf, 0)
-
-for wierz in oryginalny_graf:
-    print(wierz.numer, wierz.odleglosc)
+for wierz in graf:
+    print(f"Odległosc wierzcholka {graf[indeks_startowy].numer} od wierzcholka {wierz.numer} wynosi {wierz.odleglosc}")
