@@ -1,7 +1,7 @@
 # ALGORYTM KRUSKALA
 
 
-# każda krawędz ma postać (waga, skąd, dokąd)
+# krawędz -> (waga, skąd, dokąd)
 def wybierz_krawedzie_z_grafu(graf):
     wszystkie_krawedzie=[]
     for wierz in graf:  
@@ -25,7 +25,7 @@ def daj_las_z_pojedynczymi_drzewami(graf):
     wierzcholki=wez_wierzcholki(graf)  
     las=[]
     for wierz in wierzcholki:  
-        las.append([wierz]) #dodaj graf z jednym wierzcholkiem
+        las.append([wierz]) # dodaj graf z jednym wierzcholkiem
     return las
 
 # zwraca pozycję w lesie lub -1 jeśli nie ma takiego wierzchołka
@@ -46,7 +46,7 @@ def polacz_dwa_wierzcholki_w_grafie(graf, numerWierz1, numerWierz2, waga):
         elif wierz["numer"]==numerWierz2:   
             wierz["sasiedzi"].append((numerWierz1,waga))   
 
-# lista z "obiektami" (słowniki), pole numer i lista z sąsiadami (numer wierzchołka, waga)
+# lista z wierzchołkami (słowniki), pole numer i lista z sąsiadami
 oryginalny_graf=[
     {"numer": 1,"sasiedzi": [(2,3),(5,1)]},
     {"numer": 2,"sasiedzi": [(1,3),(3,5),(5,4)]},
@@ -56,7 +56,7 @@ oryginalny_graf=[
 ]
 
 wszystkie_krawedzie=wybierz_krawedzie_z_grafu(oryginalny_graf)
-las=daj_las_z_pojedynczymi_drzewami(oryginalny_graf) # lista z grafami (a dokładnie drzewami), początkowo mamy drzewa jednoelementowe
+las=daj_las_z_pojedynczymi_drzewami(oryginalny_graf) # lista z grafami, początkowo mamy drzewa jednoelementowe
 
 
 while len(wszystkie_krawedzie)!=0 and len(las)!=1:
@@ -68,17 +68,16 @@ while len(wszystkie_krawedzie)!=0 and len(las)!=1:
     numer_drzewa_dla1=w_ktorym_drzewie_jest_wierzcholek_o_numerze(las,numer_wierzcholka1)   
     numer_drzewa_dla2=w_ktorym_drzewie_jest_wierzcholek_o_numerze(las,numer_wierzcholka2)   
 
-    # jeśli należą do różnych drzew
-    
+    # jeśli należą do różnych drzew    
     if numer_drzewa_dla1 != numer_drzewa_dla2 and numer_drzewa_dla1!=-1 and numer_drzewa_dla2!=-1:
         las[numer_drzewa_dla1]= las[numer_drzewa_dla1]+las[numer_drzewa_dla2]   
         las.pop(numer_drzewa_dla2)   
         polacz_dwa_wierzcholki_w_grafie(las[numer_drzewa_dla1], numer_wierzcholka1, numer_wierzcholka2, waga)   
 
 
-# las zawiera wszyskie drzewa (w tym wypadku jedno bo graf był spójny)
+# las zawiera wszyskie drzewa
 print("POLACZENIA W DRZEWIE SPINAJACYM")
-for drzewo in las:   
-    for wierz in drzewo:   
+for drzewo in las:
+    for wierz in drzewo:
         for sasiad in wierz["sasiedzi"]:   
             print(f"{wierz["numer"]} <--> {sasiad[0]}, waga: {sasiad[1]}")   
