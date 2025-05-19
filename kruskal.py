@@ -37,7 +37,7 @@ def w_ktorym_drzewie_jest_wierzcholek_o_numerze(las, numer):
                 return ktoro_drzewo
         ktoro_drzewo+=1   
     return -1   
-                
+
 
 def polacz_dwa_wierzcholki_w_grafie(graf, numerWierz1, numerWierz2, waga):
     for wierz in graf:   
